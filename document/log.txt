@@ -1,0 +1,388 @@
+[FMA PROJECT] Đây là project log của mình. Hãy tiếp tục theo trạng thái notebook mới nhất và không nhầm với project Apartment Safe Zone.
+# FMA PROJECT LOG — CONTEXT CHO CHAT MỚI
+
+*Cập nhật: 23/10/2026*
+
+## 1. Thông tin dự án
+
+- **Tên repo:** `fma-music-analysis-iuh`
+- **Tên đề tài:** Phân tích dữ liệu âm nhạc FMA và ứng dụng AI
+- **Học phần:** Phân tích dữ liệu và AI — IUH
+- **Loại dự án:** Bài tập lớn cá nhân, đồng thời phát triển thành project GitHub portfolio.
+- **Notebook chính:** `notebooks/fma_music_analysis.ipynb`
+- **Notebook thử nghiệm:** `notebooks/sideNotebooks/sideNotebook.ipynb`
+- **Môi trường:** VS Code + Jupyter Notebook + Python/Pandas.
+
+### Định hướng
+
+Đây là **project FMA mang tính tham vọng**, có thể nghiên cứu và áp dụng kiến thức nâng cao khi cần thiết. Tuy nhiên, code vẫn phải dễ hiểu, có thể tự giải thích khi giảng viên hỏi.
+
+**Không áp dụng bộ quy tắc Safe Zone 90% tài liệu trường của project Apartment cho FMA.** Hai dự án hoàn toàn độc lập.
+
+## 2. Nguồn dữ liệu
+
+Sử dụng bộ dữ liệu **FMA: A Dataset for Music Analysis**, được công bố năm 2017.
+
+- **Nguồn:** UCI Machine Learning Repository
+- **DOI:** `10.24432/C5HW28`
+- **GitHub nguồn:** https://github.com/mdeff/fma
+- **Bộ dữ liệu sử dụng:** `fma_metadata.zip`
+
+Dữ liệu gốc nằm tại:
+
+`data/raw/fma_metadata/`
+
+Sử dụng 4 bảng:
+
+| File | Số dòng | Số cột |
+|---|---:|---:|
+| `tracks.csv` | 106.574 | 52 |
+| `features.csv` | 106.574 | 518 |
+| `echonest.csv` | 13.129 | 249 |
+| `genres.csv` | 163 | 5 |
+
+### Cách đọc dữ liệu đã sử dụng
+
+```python
+import pandas as pd
+
+DATA_DIR = "../data/raw/fma_metadata/"
+
+tracks = pd.read_csv(
+    DATA_DIR + "tracks.csv",
+    index_col=0,
+    header=[0, 1]
+)
+
+features = pd.read_csv(
+    DATA_DIR + "features.csv",
+    index_col=0,
+    header=[0, 1, 2]
+)
+
+echonest = pd.read_csv(
+    DATA_DIR + "echonest.csv",
+    index_col=0,
+    header=[0, 1, 2]
+)
+
+genres = pd.read_csv(DATA_DIR + "genres.csv")
+```
+
+**Lưu ý:** Các bảng dùng MultiIndex columns khác nhau. Không đọc chúng bằng `header=0` thông thường.
+
+## 3. Các yêu cầu phải hoàn thành
+
+Bài tập lớn có 14 nhóm yêu cầu:
+
+1. Thu thập dữ liệu có nguồn, mô tả và thiết kế ERD.
+2. Pandas: `info()`, `describe()`, truy vấn, sắp xếp, lọc.
+3. Kiểm tra missing, duplicate và định dạng dữ liệu; trực quan hóa dữ liệu thiếu.
+4. Làm sạch dữ liệu.
+5. Thống kê mô tả: mean, median, mode, Q1–Q3, IQR, variance, standard deviation, skewness, kurtosis...
+6. Các loại biểu đồ thống kê.
+7. Phân phối nhị thức và Poisson.
+8. Kiểm định T-Test và Z-Test.
+9. Linear Regression và Logistic Regression.
+10. K-Means.
+11. Naive Bayes.
+12. Decision Tree.
+13. PCA.
+14. Association Rules.
+
+**Giảng viên yêu cầu giải thích và nhận xét kết quả**, không chỉ chạy code.
+
+## 4. Tiến độ notebook hiện tại
+
+### Chương 1 — Giới thiệu đề tài
+
+**Trạng thái: Đã viết nội dung nền tảng.**
+
+- 1.1. Bối cảnh và lý do chọn đề tài.
+- 1.2. Mục tiêu.
+
+Có thể chỉnh sửa câu chữ và hoàn thiện phần giới thiệu sau.
+
+### Chương 2 — Tổng quan và khám phá dữ liệu
+
+**Trạng thái: Đã có code và các kết quả tương ứng.**
+
+Đã làm:
+
+- 2.1. Giới thiệu bộ dữ liệu FMA.
+- 2.2. Mô tả 4 bảng dữ liệu.
+- 2.3. Thiết kế ERD.
+- 2.4. Nạp dữ liệu vào Pandas.
+- 2.5. Khám phá tổng quan bằng `info()`, `describe()`, `value_counts()`.
+- 2.6. Truy vấn dữ liệu có điều kiện.
+- 2.7. Sắp xếp và lọc dữ liệu.
+
+Các ví dụ gồm:
+
+- Tìm bài hát dài hơn 300 giây.
+- Lọc bài hát thuộc thể loại Rock.
+- Lọc Rock có thời lượng từ 180–300 giây.
+- Truy vấn thể loại cấp cao nhất.
+- Sắp xếp theo thời lượng, lượt nghe và nhiều thuộc tính.
+
+### ERD đã thiết kế
+
+Có 5 thực thể logic:
+
+- `TRACK`: khóa chính `track_id`.
+- `FEATURES`: liên kết với TRACK qua `track_id`.
+- `ECHONEST`: liên kết với TRACK qua `track_id`.
+- `GENRES`: khóa chính `genre_id`, có quan hệ phân cấp thông qua `parent`.
+- `TRACK_GENRE`: bảng trung gian gồm `track_id`, `genre_id`.
+
+Quan hệ bài hát–thể loại là **nhiều–nhiều**.
+
+Sơ đồ lưu trong:
+
+`image/erd.png`
+
+ERD được rút gọn để dễ quan sát, không hiển thị toàn bộ 518 đặc trưng âm thanh.
+
+### Chương 3 — Đánh giá chất lượng và tiền xử lý dữ liệu
+
+**Trạng thái: Code và output hoàn thành đến hết 3.7.**
+
+#### 3.1. Kiểm tra dữ liệu thiếu — Đã làm
+
+Kết quả:
+
+| Bảng | Số ô thiếu | Tỷ lệ |
+|---|---:|---:|
+| Tracks | 1.673.813 | 30,20% |
+| Features | 0 | 0% |
+| Echonest | 83.678 | 2,56% |
+| Genres | 0 | 0% |
+
+`track.genre_top` thiếu 56.976 giá trị.
+
+#### 3.2. Trực quan hóa dữ liệu thiếu — Đã làm
+
+Đã tạo:
+
+- Biểu đồ tỷ lệ missing của 4 bảng.
+- Biểu đồ 10 thuộc tính thiếu nhiều nhất của Tracks.
+- Biểu đồ 10 thuộc tính thiếu nhiều nhất của Echonest.
+- Heatmap dữ liệu thiếu trên một mẫu bản ghi.
+
+#### 3.3. Kiểm tra trùng lặp — Đã làm
+
+- Cả 4 bảng: **0 ID trùng**.
+- `features`: **2.111 dòng trùng nội dung đặc trưng**.
+- Các bảng còn lại: 0 dòng trùng nội dung.
+
+**Quyết định:** Chưa xóa các dòng trùng nội dung của Features, vì `track_id` khác nhau và việc xóa có thể làm mất liên kết với bài hát.
+
+#### 3.4. Kiểm tra kiểu dữ liệu và định dạng — Đã làm
+
+- Thống kê kiểu dữ liệu của 4 bảng.
+- Kiểm tra các thuộc tính tiêu biểu.
+- Quan sát định dạng ngày tháng.
+- Kiểm tra chuỗi `genres_all` bắt đầu bằng `[` và kết thúc bằng `]`.
+
+Kết quả:
+
+- 106.574 giá trị `genres_all` có dấu ngoặc đúng dạng.
+- 0 giá trị sai dạng dấu ngoặc.
+
+Lưu ý: Đây chưa phải kiểm tra toàn bộ nội dung bên trong chuỗi có hợp lệ hay không.
+
+#### 3.5. Phát hiện giá trị bất thường — Đã làm
+
+Đã sử dụng:
+
+- Boxplot.
+- Phương pháp IQR.
+- Hiển thị một số bản ghi outlier.
+- Kiểm tra các giá trị âm.
+
+Kết quả IQR:
+
+| Thuộc tính | Số outlier |
+|---|---:|
+| `duration` | 7.709 |
+| `listens` | 11.391 |
+| `favorites` | 9.232 |
+
+Không có giá trị âm ở ba thuộc tính này.
+
+**Quyết định:** Không tự động xóa outlier theo IQR vì những giá trị lớn vẫn có thể phản ánh dữ liệu âm nhạc hợp lệ.
+
+#### 3.6. Xử lý dữ liệu thiếu, trùng lặp và bất thường — Đã làm
+
+Đã tạo:
+
+- `tracks_clean`: bản sao dữ liệu đã xử lý có chọn lọc.
+- `tracks_labeled`: chỉ gồm các bài hát có `genre_top`.
+- `tracks_valid_duration`: chỉ gồm bài hát có thời lượng dương.
+
+Các thao tác:
+
+- Điền 1 giá trị thiếu `track.title` bằng `Unknown Title`.
+- Điền 1.025 giá trị thiếu `album.title` bằng `Unknown Album`.
+- Giữ missing ở metadata tùy chọn.
+- Không tự điền nhãn `genre_top`.
+- Không xóa hàng loạt các dòng Features trùng nội dung.
+- Giữ outlier IQR vì chưa đủ căn cứ xác định lỗi.
+
+Kết quả:
+
+- `tracks_clean`: 106.574 bài hát.
+- `tracks_labeled`: 49.598 bài hát.
+- Bài hát chưa có nhãn: 56.976.
+- Số bài hát có thời lượng bằng 0: 16.
+- `tracks_valid_duration`: 106.558 bài hát.
+
+So sánh missing của Tracks:
+
+- Trước xử lý: 1.673.813 ô.
+- Sau xử lý: 1.672.787 ô.
+- Không mất bản ghi nào trong `tracks_clean`.
+
+**Nguyên tắc:** Không cố làm tỷ lệ missing về 0 bằng cách xóa dữ liệu hàng loạt.
+
+#### 3.7. Liên kết và hợp nhất các bảng dữ liệu — Đã làm
+
+Đã kiểm tra khóa và dùng `join()`/`merge()`.
+
+Kết quả:
+
+- Tracks–Features: 106.574 ID khớp.
+- Tracks–Echonest: 13.129 ID khớp.
+- 0 ID Features không khớp Tracks.
+- 0 ID Echonest không khớp Tracks.
+
+Các DataFrame đã tạo:
+
+| DataFrame | Chức năng |
+|---|---|
+| `track_info` | Metadata được chọn từ Tracks |
+| `audio_features` | 3 đặc trưng âm thanh tiêu biểu |
+| `analysis_df` | Ghép track_info với audio_features |
+| `echonest_info` | Danceability, energy, tempo |
+| `analysis_echonest` | Ghép dữ liệu âm thanh với Echonest |
+| `track_genre` | Bảng trung gian bài hát–thể loại |
+| `track_genre_detail` | Bảng trung gian có tên thể loại |
+
+Kích thước:
+
+- `analysis_df`: 106.574 × 9.
+- `analysis_echonest`: 13.129 × 12.
+- `track_genre`: 349.160 dòng.
+- `track_genre_detail`: 349.160 dòng.
+- 0 quan hệ bài hát–thể loại không tìm thấy tên thể loại.
+
+Trong `track_genre`, đã dùng `ast.literal_eval()` và `.explode()` để chuyển `genres_all` thành quan hệ nhiều–nhiều.
+
+**Lưu ý:** Các dòng `track_genre` không tương ứng một–một với bài hát; một bài hát có thể có nhiều thể loại.
+
+#### 3.8. Lựa chọn đặc trưng và chuẩn bị dữ liệu phân tích — CHƯA CODE
+
+Trong chat trước, đã có hướng triển khai nhưng **notebook hiện mới có heading**.
+
+Phương án dự kiến:
+
+- Lựa chọn nhóm đặc trưng MFCC mean, kết hợp một số đặc trưng khác.
+- Tạo dữ liệu phân loại từ audio features và `genre_top`.
+- Logistic Regression: cân nhắc bài toán Rock / Không Rock.
+- Linear Regression: nghiên cứu lượt nghe theo thời lượng và đặc trưng âm thanh, cần kiểm tra tính phù hợp.
+- K-Means/PCA: dùng dữ liệu âm thanh dạng số.
+- Association Rules: dùng `track_genre`.
+
+Chưa nên coi các DataFrame dự kiến như `ml_features`, `classification_df`, `regression_df` đã tồn tại trong notebook.
+
+#### 3.9. Đánh giá chất lượng sau xử lý — CHƯA LÀM
+
+Đã thống nhất:
+
+- Có thể tạm skip.
+- Chủ yếu là nhận xét tổng kết.
+- Nếu cần code thì chỉ thêm bảng đối chiếu ngắn, tránh lặp lại bảng đã có ở 3.6.
+
+## 5. Những chương tiếp theo chưa triển khai
+
+Notebook đã có sườn các chương:
+
+- **Chương 4:** Thống kê mô tả và trực quan hóa.
+- **Chương 5:** Phân phối Binomial, Poisson; kiểm định T-Test, Z-Test.
+- **Chương 6:** Linear Regression, Logistic Regression.
+- **Chương 7:** K-Means, Naive Bayes, Decision Tree, PCA.
+- **Chương 8:** Association Rules, Apriori, Support, Confidence, Lift.
+- **Chương 9:** Kết luận và hướng phát triển.
+
+Các chương này **hiện chưa có code triển khai trong bản notebook đã kiểm tra**.
+
+Cần chú ý thiết kế bài toán phù hợp cho:
+
+- Phân phối Poisson.
+- T-Test và Z-Test.
+- Hồi quy tuyến tính trên biến lượt nghe có phân phối lệch.
+- Phân loại với nhãn `genre_top` bị thiếu nhiều.
+- Phân nhóm âm thanh và PCA.
+- Luật kết hợp trên hệ thống thể loại phân cấp.
+
+## 6. Quy tắc làm việc khi tiếp tục FMA
+
+1. Đây là project **FMA**, tuyệt đối không nhầm sang Apartment hoặc Seoul Bike.
+2. Sử dụng tài liệu và bài thực hành IUH làm nền tảng, nhưng cho phép kiến thức ngoài khi thực sự hữu ích.
+3. Ưu tiên code dễ đọc, dễ giải thích khi giảng viên hỏi.
+4. Dùng Pandas, NumPy, Matplotlib, Seaborn, SciPy, scikit-learn và thư viện khác khi phù hợp với yêu cầu.
+5. Ưu tiên các DataFrame đã tạo, không đọc lại dữ liệu hoặc làm lại tiền xử lý vô ích.
+6. Dùng `display()` cho bảng và `plt.show()` cho biểu đồ.
+7. Mỗi phần nên có tiêu đề Markdown, mục tiêu, code, kết quả và nhận xét.
+8. **Hiện ưu tiên hoàn thành code trước; giải thích và nhận xét chi tiết có thể bổ sung sau.**
+9. Không tự suy đoán kết quả chạy. Cần căn cứ output thực tế.
+10. Không tùy tiện làm thay đổi dữ liệu gốc `tracks`, `features`, `echonest`, `genres`.
+11. Cần bảo toàn liên kết `track_id` giữa các bảng.
+12. Không dùng `genre_top` làm biến đầu vào khi chính nó là nhãn cần dự đoán.
+13. Với dữ liệu trùng vector đặc trưng, cần chú ý khả năng trùng giữa train/test.
+14. Khi chuẩn hóa dữ liệu cho mô hình có train/test, tránh rò rỉ dữ liệu từ tập kiểm tra.
+
+## 7. Các tài liệu IUH được sử dụng
+
+- `BaiGiang-PhanTichDuLieu-AI.pdf`
+- `C01_TongQuanPhanTichDuLieu.pdf`
+- `C02_1.QuaTrinhKhamPhaDuLieu.pdf`
+- `C02_2.XuLyDuLieuVoiPandas.pdf`
+- `C03_QuaTrinhXuLyDuLieuEDA.pdf`
+- `C04_ThongKePhanTichSuyDien.pdf`
+- `C05_PhanPhoiXacSuat.pdf`
+- `C06_CacLoaiKiemDinh_Chinh.pdf`
+- `C07_1_HiepPhuongSai_HoiQuyTuyenTinh_CHINH.pdf`
+- `C08_MachineLearning_HocMay.pdf`
+- `C09_HocKhongGiamSat_K-Mean_LuatKetHop_Chinh.pdf`
+- `C10_CayQuyetDinh_NhanToPCA.pdf`
+- Tài liệu bài tập thực hành của trường.
+
+Khi được yêu cầu bám tài liệu trường, phải kiểm tra nội dung thật của tài liệu, không tự nhận rằng một kỹ thuật đã được dạy nếu chưa có căn cứ.
+
+## 8. Tình trạng dự án và kế hoạch hiện tại
+
+FMA đang được **tạm dừng có chủ đích** sau mục 3.7 để chuyển sang xây dựng project backup Apartment, do người thực hiện còn nhiều deadline các môn khác.
+
+Ba hướng dữ liệu đã thống nhất:
+
+- **FMA:** Project chính, tham vọng và có thể phát triển thành portfolio.
+- **Apartment:** Backup + project GitHub thứ hai, theo định hướng Safe Zone, bám sát giáo trình.
+- **Seoul Bike:** Dành cho ôn thi cuối kỳ.
+
+Không coi việc chuyển sang Apartment là từ bỏ FMA.
+
+### Khi quay lại FMA
+
+Thứ tự ưu tiên:
+
+1. Kiểm tra notebook mới nhất và các cell đã chạy.
+2. Tiếp tục mục 3.8 nếu chưa có code.
+3. Giữ 3.9 ngắn gọn hoặc hoàn thiện khi viết nhận xét.
+4. Triển khai các thuật toán còn thiếu để đáp ứng đủ 14 yêu cầu.
+5. Viết nhận xét và giải thích các output.
+6. Kiểm tra lại toàn bộ notebook bằng cách chạy tuần tự từ đầu.
+7. Hoàn thiện README, nguồn dữ liệu, biểu đồ, kết luận và GitHub.
+
+**Yêu cầu quan trọng:** Khi tiếp tục hỗ trợ, không bắt đầu lại dự án từ đầu. Hãy dựa vào tiến độ hiện có, kết quả đã chạy và những quyết định xử lý dữ liệu đã thống nhất.
+
