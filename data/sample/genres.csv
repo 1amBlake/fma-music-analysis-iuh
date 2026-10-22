@@ -1,0 +1,164 @@
+,genre_id,#tracks,parent,title,top_level
+0,1,8693,38,Avant-Garde,38
+1,2,5271,0,International,2
+2,3,1752,0,Blues,3
+3,4,4126,0,Jazz,4
+4,5,4106,0,Classical,5
+5,6,914,38,Novelty,38
+6,7,217,20,Comedy,20
+7,8,868,0,Old-Time / Historic,8
+8,9,1987,0,Country,9
+9,10,13845,0,Pop,10
+10,11,367,14,Disco,14
+11,12,32923,0,Rock,12
+12,13,730,0,Easy Listening,13
+13,14,1499,0,Soul-RnB,14
+14,15,34413,0,Electronic,15
+15,16,304,6,Sound Effects,38
+16,17,12706,0,Folk,17
+17,18,5913,1235,Soundtrack,1235
+18,19,773,14,Funk,14
+19,20,1876,0,Spoken,20
+20,21,8389,0,Hip-Hop,21
+21,22,774,38,Audio Collage,38
+22,25,9261,12,Punk,12
+23,26,1952,12,Post-Rock,12
+24,27,6041,12,Lo-Fi,12
+25,30,3237,38,Field Recordings,38
+26,31,1498,12,Metal,12
+27,32,7268,38,Noise,38
+28,33,2267,17,Psych-Folk,17
+29,36,688,12,Krautrock,12
+30,37,97,4,Jazz: Vocal,4
+31,38,38154,0,Experimental,38
+32,41,6110,38,Electroacoustic,38
+33,42,5723,15,Ambient Electronic,15
+34,43,210,65,Radio Art,20
+35,45,2469,12,Loud-Rock,12
+36,46,573,2,Latin America,2
+37,47,2546,38,Drone,38
+38,49,753,17,Free-Folk,17
+39,53,2071,45,Noise-Rock,12
+40,58,2502,12,Psych-Rock,12
+41,63,178,9,Bluegrass,9
+42,64,563,25,Electro-Punk,12
+43,65,518,20,Radio,20
+44,66,5432,12,Indie-Rock,12
+45,70,2230,12,Industrial,12
+46,71,600,25,No Wave,12
+47,74,1531,4,Free-Jazz,4
+48,76,7144,10,Experimental Pop,10
+49,77,387,2,French,2
+50,79,880,2,Reggae - Dub,2
+51,81,110,92,Afrobeat,2
+52,83,84,21,Nerdcore,21
+53,85,3548,12,Garage,12
+54,86,216,2,Indian,2
+55,88,517,12,New Wave,12
+56,89,1858,25,Post-Punk,12
+57,90,251,53,Sludge,12
+58,92,329,2,African,2
+59,94,1289,17,Freak-Folk,17
+60,97,291,4,Jazz: Out,4
+61,98,795,12,Progressive,12
+62,100,740,21,Alternative Hip-Hop,21
+63,101,196,31,Death-Metal,12
+64,102,176,2,Middle East,2
+65,103,4162,17,Singer-Songwriter,17
+66,107,7206,1235,Ambient,1235
+67,109,1419,25,Hardcore,12
+68,111,1003,25,Power-Pop,12
+69,113,484,26,Space-Rock,12
+70,117,62,2,Polka,2
+71,118,608,2,Balkan,2
+72,125,1511,38,Unclassifiable,38
+73,130,727,2,Europe,2
+74,137,994,9,Americana,9
+75,138,490,20,Spoken Weird,20
+76,166,122,65,Interview,20
+77,167,152,31,Black-Metal,12
+78,169,128,9,Rockabilly,9
+79,170,47,13,Easy Listening: Vocal,13
+80,171,234,2,Brazilian,2
+81,172,118,2,Asia-Far East,2
+82,173,4,86,N. Indian Traditional,2
+83,174,17,86,South Indian Traditional,2
+84,175,0,86,Bollywood,2
+85,176,23,2,Pacific,2
+86,177,72,2,Celtic,2
+87,178,0,4,Be-Bop,4
+88,179,104,4,Big Band/Swing,4
+89,180,161,17,British Folk,17
+90,181,2140,15,Techno,15
+91,182,1482,15,House,15
+92,183,2809,15,Glitch,15
+93,184,1013,15,Minimal Electronic,15
+94,185,511,15,Breakcore - Hard,15
+95,186,682,38,Sound Poetry,38
+96,187,292,5,20th Century Classical,5
+97,188,301,20,Poetry,20
+98,189,26,65,Talk Radio,20
+99,214,40,92,North African,2
+100,224,1916,38,Sound Collage,38
+101,232,47,2,Flamenco,2
+102,236,3472,15,IDM,15
+103,240,1231,297,Chiptune,15
+104,247,2957,38,Musique Concrete,38
+105,250,4261,38,Improv,38
+106,267,360,1235,New Age,1235
+107,286,1751,15,Trip-Hop,15
+108,296,1414,15,Dance,15
+109,297,2208,15,Chip Music,15
+110,311,440,13,Lounge,13
+111,314,482,12,Goth,12
+112,322,630,5,Composed Music,5
+113,337,500,15,Drum & Bass,15
+114,359,762,12,Shoegaze,12
+115,360,201,6,Kid-Friendly,38
+116,361,175,109,Thrash,12
+117,362,1835,10,Synth Pop,10
+118,374,9,20,Banter,20
+119,377,1,19,Deep Funk,14
+120,378,177,20,Spoken Word,20
+121,400,823,182,Chill-out,15
+122,401,189,181,Bigbeat,15
+123,404,265,85,Surf,12
+124,428,73,20,Radio Theater,20
+125,439,314,31,Grindcore,12
+126,440,116,12,Rock Opera,12
+127,441,161,5,Opera,5
+128,442,170,5,Chamber Music,5
+129,443,216,5,Choral Music,5
+130,444,25,5,Symphony,5
+131,456,1392,38,Minimalism,38
+132,465,18,20,Musical Theater,20
+133,468,1144,15,Dubstep,15
+134,491,78,468,Skweee,15
+135,493,4,651,Western Swing,9
+136,495,2061,15,Downtempo,15
+137,502,67,46,Cumbia,2
+138,504,114,2,Latin,2
+139,514,1414,38,Sound Art,38
+140,524,112,130,Romany (Gypsy),2
+141,538,338,18,Compilation,1235
+142,539,638,21,Rap,21
+143,542,735,21,Breakbeat,21
+144,567,66,3,Gospel,3
+145,580,202,21,Abstract Hip-Hop,21
+146,602,94,79,Reggae - Dancehall,2
+147,619,115,130,Spanish,2
+148,651,79,9,Country & Western,9
+149,659,1239,5,Contemporary Classical,5
+150,693,56,21,Wonky,21
+151,695,258,15,Jungle,15
+152,741,57,130,Klezmer,2
+153,763,268,16,Holiday,38
+154,808,12,46,Salsa,2
+155,810,120,13,Nu-Jazz,13
+156,811,1192,21,Hip-Hop Beats,21
+157,906,107,4,Modern Jazz,4
+158,1032,60,102,Turkish,2
+159,1060,30,46,Tango,2
+160,1156,26,130,Fado,2
+161,1193,72,763,Christmas,38
+162,1235,14938,0,Instrumental,1235
